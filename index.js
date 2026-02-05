@@ -6,6 +6,7 @@ app.get('/', function (req, res) {
     res.send ('ZecaInfo')
 })
 
+//----CARREGANDO DADOS JSON DIRETO NO ARQUIVO
 // const lista_produtos = [
 //     {
 //         "titulo": "Red Nike",
@@ -30,13 +31,40 @@ app.get('/', function (req, res) {
 //     }
 // ]
 
-const lista_produtos = require ('./dados.json')
-
+//---CARREGANDO ARQUIVO dados.json
+//const lista_produtos = require ('./dados.json')
 // Read All - [GET] / produtos
+
+let mysql = require('mysql')
+let conexao = mysql.createConnection({
+    host:"108.179.193.209",
+    user: "gutoxa27_alunos",
+    password:"JD_eXLNHp1ZG",
+    database:"gutoxa27_bd_loja"
+})
+
+
+// host: 108.179.193.209
+// banco: gutoxa27_bd_loja
+// usuario: gutoxa27_alunos
+// senha: JD_eXLNHp1ZG
+
+conexao.connect(function(erro){
+    if(erro){
+        console.log("Não foi possível estabelecer conexão \n")
+        throw erro;
+    }else{
+        console.log("Sucesso na Conexão \n")
+    }
+});
 
 app.get("/produtos", function (req, res){
     res.setHeader('Access-Control-Allow-Origin', '*')
-    res.send(lista_produtos)
+    //res.send(lista_produtos)
+    conexao.query("SELECT * FROM `produtos` WHERE avaliacao = 4 OR avaliacao = 5 ORDER BY avaliacao ASC", function(erro,lista_produtos,campos){
+        console.log(lista_produtos);
+        res.send(lista_produtos);
+    })
 })
 
 app.listen (3000)

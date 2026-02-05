@@ -8,6 +8,11 @@
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
+.card-unidade .card-img-top{
+    height: 250px;
+    object-fit: cover;
+}
+
 .title-unidade{
     font-size: 50px;
     margin: 15px;
@@ -19,6 +24,7 @@
     padding: 10px;
     margin: 0.5px;
     background-color: #e9e9e986;
+    border-radius: 10px;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 

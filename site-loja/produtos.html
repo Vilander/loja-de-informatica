@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja do Zé</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+                <a class="navbar-brand"><img src="data:image/png;base64,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" alt="hot-sales-hours"><span>Loja do Zé</span></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="produtos.html">Todos os Produtos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="produtos.html?categoria=tenis">Tênis</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="produtos.html?categoria=camisetas">Camisetas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="produtos.html?categoria=oculos">Óculos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="unidades.html">Unidades</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </nav>
+    <div class="container">
+        <h1 class="text-center mb-5 mt-3">Lista de Produtos</h1>
+        <div id="listaProduto" class="row lista-produtos">
+
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

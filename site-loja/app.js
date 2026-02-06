@@ -30,7 +30,14 @@ function fnMontarCardProduto(produto){
 }
 
 function fnCarregarDados(){
-    fetch('http://localhost:3000/produtos/', { method: 'GET'})
+    const parametros = new URLSearchParams(window.location.search);
+    const existeCategoria = parametros.has('categoria');
+
+    let rotaCategoria = ""
+    if(existeCategoria){
+        rotaCategoria = parametros.get('categoria') + "/"
+    }
+    fetch('http://localhost:3000/produtos/' + rotaCategoria, { method: 'GET'})
     .then(response => response.json ())
     .then((produtos) => {
         produtos.forEach(produto => {

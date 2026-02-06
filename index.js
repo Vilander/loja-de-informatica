@@ -58,11 +58,22 @@ conexao.connect(function(erro){
     }
 });
 
+//READY ALL
 app.get("/produtos", function (req, res){
     res.setHeader('Access-Control-Allow-Origin', '*')
     //res.send(lista_produtos)
-    conexao.query("SELECT * FROM `produtos` WHERE avaliacao = 4 OR avaliacao = 5 ORDER BY avaliacao ASC", function(erro,lista_produtos,campos){
+    conexao.query("SELECT * FROM `produtos` ORDER BY avaliacao ASC", function(erro,lista_produtos,campos){
         console.log(lista_produtos);
+        res.send(lista_produtos);
+    })
+})
+
+//READY BY CATEGORIA
+app.get("/produtos/:categoria", function (req, res){
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    //pegamos a categoria que foi enviada na requisição
+    const categoria = req.params.categoria
+    conexao.query(`SELECT * FROM produtos WHERE categoria = '${categoria}'`, function(erro,lista_produtos,campos){
         res.send(lista_produtos);
     })
 })

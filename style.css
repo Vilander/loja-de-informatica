@@ -13,6 +13,16 @@
     object-fit: cover;
 }
 
+.ordenarPor{
+    display: flex;
+    padding: 5px;
+}
+.ordenarPor a{
+    margin: 5px;
+    border-style: solid;
+    border-color: #5e5ed8;
+}
+
 .title-unidade{
     font-size: 50px;
     margin: 15px;

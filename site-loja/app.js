@@ -32,12 +32,20 @@ function fnMontarCardProduto(produto){
 function fnCarregarDados(){
     const parametros = new URLSearchParams(window.location.search);
     const existeCategoria = parametros.has('categoria');
+    const existeOrdem = parametros.has('ordem')
 
     let rotaCategoria = ""
     if(existeCategoria){
         rotaCategoria = parametros.get('categoria') + "/"
     }
-    fetch('http://localhost:3000/produtos/' + rotaCategoria, { method: 'GET'})
+
+    let rotaOrdem = ""
+    if(existeOrdem){
+        rotaOrdem = parametros.get('ordem') + "/"
+    }
+
+
+    fetch('http://localhost:3000/produtos/' + rotaCategoria + rotaOrdem, { method: 'GET'})
     .then(response => response.json ())
     .then((produtos) => {
         produtos.forEach(produto => {
@@ -48,3 +56,4 @@ function fnCarregarDados(){
 }
 
 fnCarregarDados()
+

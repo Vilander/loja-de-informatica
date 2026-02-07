@@ -85,7 +85,7 @@ app.get("/produtos/:categoria/:ordem", function (req, res){
     console.log(ordem)
     conexao.query(`SELECT * FROM produtos WHERE categoria = '${categoria}' ORDER BY ${ordem} ASC`, function(erro,lista_produtos,campos){
         res.send(lista_produtos);
-        console.log()
+        //console.log()
     })
 })
 

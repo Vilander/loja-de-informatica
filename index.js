@@ -1,8 +1,13 @@
 const express = require('express')
 const app = express()
 
+//necessárop ára permitir requisições de diferentes origens(domínios/servidores)
+const cors = require('cors')
+app.use(cors())
+app.use(express.json())
+
 app.get('/', function (req, res) {
-    res.setHeader('Access-Control-Allow-Origin', '*')
+//    res.setHeader('Access-Control-Allow-Origin', '*')
     res.send ('ZecaInfo')
 })
 
@@ -60,7 +65,7 @@ conexao.connect(function(erro){
 
 //READY ALL
 app.get("/produtos", function (req, res){
-    res.setHeader('Access-Control-Allow-Origin', '*')
+    //res.setHeader('Access-Control-Allow-Origin', '*')
     //res.send(lista_produtos)
     conexao.query("SELECT * FROM `produtos` ORDER BY avaliacao ASC", function(erro,lista_produtos,campos){
         //console.log(lista_produtos);
@@ -70,7 +75,7 @@ app.get("/produtos", function (req, res){
 
 //READY BY CATEGORIA
 app.get("/produtos/:categoria", function (req, res){
-    res.setHeader('Access-Control-Allow-Origin', '*')
+    //res.setHeader('Access-Control-Allow-Origin', '*')
     //pegamos a categoria que foi enviada na requisição
     const categoria = req.params.categoria
     conexao.query(`SELECT * FROM produtos WHERE categoria = '${categoria}'`, function(erro,lista_produtos,campos){
@@ -79,23 +84,36 @@ app.get("/produtos/:categoria", function (req, res){
 })
 
 app.get("/produtos/:categoria/:ordem", function (req, res){
-    res.setHeader('Access-Control-Allow-Origin', '*')
+    //res.setHeader('Access-Control-Allow-Origin', '*')
     const categoria = req.params.categoria
     const ordem = req.params.ordem
-    console.log(ordem)
+    //console.log(ordem)
     conexao.query(`SELECT * FROM produtos WHERE categoria = '${categoria}' ORDER BY ${ordem} ASC`, function(erro,lista_produtos,campos){
         res.send(lista_produtos);
         //console.log()
     })
 })
 
+app.post("/produto/",function(req,res){
+    const { titulo, preco, descricao, avaliacao, foto, categoria} = req.body
+    conexao.query(`INSERT INTO produtos(titulo, preco, descricao, avaliacao, foto, categoria) values('${titulo}', '${preco}', '${descricao}', '${avaliacao}', '${foto}', '${categoria}')`,
+        function(erro, resultado){
+            if(erro){
+                res.json(erro)
+            }
+            res.send(resultado.insertId)
+        }
+    )
+})
+
 app.get("/unidades", function (req, res){
-    res.setHeader('Access-Control-Allow-Origin', '*')
+    //res.setHeader('Access-Control-Allow-Origin', '*')
     conexao.query("SELECT * FROM `unidades`", function(erro,lista_unidades,campos){
         //console.log(lista_unidades);
         res.send(lista_unidades);
     })
 })
+
 
 app.listen (3000)
 

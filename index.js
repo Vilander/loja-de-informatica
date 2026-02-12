@@ -114,6 +114,19 @@ app.get("/unidades", function (req, res){
     })
 })
 
+app.post("/unidade/",function(req,res){
+    const { nome_da_loja, foto, telefone, email, endereco, latitude, longitude} = req.body
+    conexao.query(`INSERT INTO unidades(nome_da_loja, foto, telefone, email, endereco, latitude, longitude) values('${nome_da_loja}', '${foto}', '${telefone}', '${email}', '${endereco}', '${latitude}', '${longitude}')`,
+        function(erro, resultado){
+            if(erro){
+                res.json(erro)
+            }
+            res.send(resultado.insertId)
+        }
+    )
+})
+
+
 
 app.listen (3000)
 

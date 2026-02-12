@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja do Zé</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="container py-3 py-md-5 py-xl-8">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="card border-dark rounded shadow-sm overflow-hidden">
+                    <div class="card-body p-0">
+                        <div class="row g-0">
+                            
+                            <div id="fundo-imagem" class="col-12 col-lg-6 bsb-overlay"
+                                style="background-image: url('https://images.unsplash.com/photo-1740630386542-6e0953160fb4?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); background-size: cover; background-position: center;">
+                                <div class="d-flex align-items-center h-100 p-4 p-xl-5" style="background-color: rgba(0, 0, 0, 0.55);">
+                                    <div>
+                                        <h2 class="h1 mb-3 text-light">Cadastro das Unidades</h2>
+                                        <p class="lead fs-4 text-light opacity-75 mb-0">Preencha ao lado as informações sobre sua unidade.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-6">
+                                <form action="#" id="form-unidades" class="p-4 p-xl-5">
+                                    <div class="row gy-4">
+                                        <div class="col-12">
+                                            <label for="nome_da_loja" class="form-label">Nome da Unidade</label>
+                                            <input type="text" class="form-control" id="nome_da_loja">
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="foto" class="form-label">Foto da unidade</label>
+                                            <input type="text" class="form-control" id="foto">
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <label for="telefone" class="form-label">Telefone</label>
+                                            <input type="tel" class="form-control" id="telefone">
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <label for="email" class="form-label">Email</label>
+                                            <input type="email" class="form-control" id="email">
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="endereco" class="form-label">Endereço</label>
+                                            <input type="text" class="form-control" id="endereco">
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <label for="latitude" class="form-label">Latitude</label>
+                                            <input type="text" class="form-control" id="latitude">
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <label for="longitude" class="form-label">Longitude</label>
+                                            <input type="text" class="form-control" id="longitude">
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="d-grid mt-3">
+                                                <button class="btn btn-primary btn-lg" type="button" id="btn-salvar-unidade">
+                                                    Cadastrar unidade
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div> </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="app-form-unidade.js"></script>
+</body>
+
+</html>

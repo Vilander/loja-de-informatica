@@ -8,24 +8,25 @@
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
-.card-unidade .card-img-top{
+.card-unidade .card-img-top {
     height: 250px;
     object-fit: cover;
 }
 
-.ordenarPor{
+.ordenarPor {
     display: flex;
     padding: 5px;
 }
-.ordenarPor a{
+
+.ordenarPor a {
     margin: 5px;
-    border:2px solid #ededf7;
+    border: 2px solid #ededf7;
     padding: 15px;
     border-radius: 12px;
     background-color: #d7d3ff;
 }
 
-.title-unidade{
+.title-unidade {
     font-size: 50px;
     margin: 15px;
     color: rgb(27, 0, 53);
@@ -40,7 +41,7 @@
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
-.contato{
+.contato {
     display: grid;
     padding: 5px;
     margin-top: 10px;
@@ -52,10 +53,28 @@
 
 .card:hover {
     transform: scale(1.05);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
 .card-unidade:hover {
     transform: scale(1.05);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.botao {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    padding: 2px;
+    color: #f5f5f5 !important;
+    margin: 0 15px;
+}
+
+button a {
+    color: #f5f5f5 !important;
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: #4a4a4a;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out;
 }

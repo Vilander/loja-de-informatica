@@ -1,15 +1,15 @@
-const express = require('express')
-const app = express()
+const express = require("express");
+const app = express();
 
 //necessárop ára permitir requisições de diferentes origens(domínios/servidores)
-const cors = require('cors')
-app.use(cors())
-app.use(express.json())
+const cors = require("cors");
+app.use(cors());
+app.use(express.json());
 
-app.get('/', function (req, res) {
-//    res.setHeader('Access-Control-Allow-Origin', '*')
-    res.send ('ZecaInfo')
-})
+app.get("/", function (req, res) {
+  //    res.setHeader('Access-Control-Allow-Origin', '*')
+  res.send("ZecaInfo");
+});
 
 //----CARREGANDO DADOS JSON DIRETO NO ARQUIVO
 // const lista_produtos = [
@@ -40,93 +40,104 @@ app.get('/', function (req, res) {
 //const lista_produtos = require ('./dados.json')
 // Read All - [GET] / produtos
 
-let mysql = require('mysql')
+let mysql = require("mysql");
 let conexao = mysql.createConnection({
-    host:"108.179.193.209",
-    user: "gutoxa27_alunos",
-    password:"JD_eXLNHp1ZG",
-    database:"gutoxa27_bd_loja"
-})
-
+  host: "108.179.193.209",
+  user: "gutoxa27_alunos",
+  password: "JD_eXLNHp1ZG",
+  database: "gutoxa27_bd_loja",
+});
 
 // host: 108.179.193.209
 // banco: gutoxa27_bd_loja
 // usuario: gutoxa27_alunos
 // senha: JD_eXLNHp1ZG
 
-conexao.connect(function(erro){
-    if(erro){
-        console.log("Não foi possível estabelecer conexão \n")
-        throw erro;
-    }else{
-        console.log("Sucesso na Conexão \n")
-    }
+conexao.connect(function (erro) {
+  if (erro) {
+    console.log("Não foi possível estabelecer conexão \n");
+    throw erro;
+  } else {
+    console.log("Sucesso na Conexão \n");
+  }
 });
 
 //READY ALL
-app.get("/produtos", function (req, res){
-    //res.setHeader('Access-Control-Allow-Origin', '*')
-    //res.send(lista_produtos)
-    conexao.query("SELECT * FROM `produtos` ORDER BY avaliacao ASC", function(erro,lista_produtos,campos){
-        //console.log(lista_produtos);
-        res.send(lista_produtos);
-    })
-})
+app.get("/produtos", function (req, res) {
+  //res.setHeader('Access-Control-Allow-Origin', '*')
+  //res.send(lista_produtos)
+  conexao.query(
+    "SELECT * FROM `produtos` ORDER BY avaliacao ASC",
+    function (erro, lista_produtos, campos) {
+      //console.log(lista_produtos);
+      res.send(lista_produtos);
+    },
+  );
+});
 
 //READY BY CATEGORIA
-app.get("/produtos/:categoria", function (req, res){
-    //res.setHeader('Access-Control-Allow-Origin', '*')
-    //pegamos a categoria que foi enviada na requisição
-    const categoria = req.params.categoria
-    conexao.query(`SELECT * FROM produtos WHERE categoria = '${categoria}'`, function(erro,lista_produtos,campos){
-        res.send(lista_produtos);
-    })
-})
+app.get("/produtos/:categoria", function (req, res) {
+  //res.setHeader('Access-Control-Allow-Origin', '*')
+  //pegamos a categoria que foi enviada na requisição
+  const categoria = req.params.categoria;
+  conexao.query(
+    `SELECT * FROM produtos WHERE categoria = '${categoria}'`,
+    function (erro, lista_produtos, campos) {
+      res.send(lista_produtos);
+    },
+  );
+});
 
-app.get("/produtos/:categoria/:ordem", function (req, res){
-    //res.setHeader('Access-Control-Allow-Origin', '*')
-    const categoria = req.params.categoria
-    const ordem = req.params.ordem
-    //console.log(ordem)
-    conexao.query(`SELECT * FROM produtos WHERE categoria = '${categoria}' ORDER BY ${ordem} ASC`, function(erro,lista_produtos,campos){
-        res.send(lista_produtos);
-        //console.log()
-    })
-})
+app.get("/produtos/:categoria/:ordem", function (req, res) {
+  //res.setHeader('Access-Control-Allow-Origin', '*')
+  const categoria = req.params.categoria;
+  const ordem = req.params.ordem;
+  //console.log(ordem)
+  conexao.query(
+    `SELECT * FROM produtos WHERE categoria = '${categoria}' ORDER BY ${ordem} ASC`,
+    function (erro, lista_produtos, campos) {
+      res.send(lista_produtos);
+      //console.log()
+    },
+  );
+});
 
-app.post("/produto/",function(req,res){
-    const { titulo, preco, descricao, avaliacao, foto, categoria} = req.body
-    conexao.query(`INSERT INTO produtos(titulo, preco, descricao, avaliacao, foto, categoria) values('${titulo}', '${preco}', '${descricao}', '${avaliacao}', '${foto}', '${categoria}')`,
-        function(erro, resultado){
-            if(erro){
-                res.json(erro)
-            }
-            res.send(resultado.insertId)
-        }
-    )
-})
+app.post("/produto/", function (req, res) {
+  const { titulo, preco, descricao, avaliacao, foto, categoria } = req.body;
+  conexao.query(
+    `INSERT INTO produtos(titulo, preco, descricao, avaliacao, foto, categoria) values('${titulo}', '${preco}', '${descricao}', '${avaliacao}', '${foto}', '${categoria}')`,
+    function (erro, resultado) {
+      if (erro) {
+        res.json(erro);
+      }
+      res.send(resultado.insertId);
+    },
+  );
+});
 
-app.get("/unidades", function (req, res){
-    //res.setHeader('Access-Control-Allow-Origin', '*')
-    conexao.query("SELECT * FROM `unidades`", function(erro,lista_unidades,campos){
-        //console.log(lista_unidades);
-        res.send(lista_unidades);
-    })
-})
+app.get("/unidades", function (req, res) {
+  //res.setHeader('Access-Control-Allow-Origin', '*')
+  conexao.query(
+    "SELECT * FROM `unidades`",
+    function (erro, lista_unidades, campos) {
+      //console.log(lista_unidades);
+      res.send(lista_unidades);
+    },
+  );
+});
 
-app.post("/unidade/",function(req,res){
-    const { nome_da_loja, foto, telefone, email, endereco, latitude, longitude} = req.body
-    conexao.query(`INSERT INTO unidades(nome_da_loja, foto, telefone, email, endereco, latitude, longitude) values('${nome_da_loja}', '${foto}', '${telefone}', '${email}', '${endereco}', '${latitude}', '${longitude}')`,
-        function(erro, resultado){
-            if(erro){
-                res.json(erro)
-            }
-            res.send(resultado.insertId)
-        }
-    )
-})
+app.post("/unidade/", function (req, res) {
+  const { nome_da_loja, foto, telefone, email, endereco, latitude, longitude } =
+    req.body;
+  conexao.query(
+    `INSERT INTO unidades(nome_da_loja, telefone, email, endereco, latitude, longitude, foto) values('${nome_da_loja}', '${telefone}', '${email}', '${endereco}', '${latitude}', '${longitude}', '${foto}')`,
+    function (erro, resultado) {
+      if (erro) {
+        res.json(erro);
+      }
+      res.send(resultado.insertId);
+    },
+  );
+});
 
-
-
-app.listen (3000)
-
+app.listen(3000);

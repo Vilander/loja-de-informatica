@@ -103,9 +103,10 @@ app.get("/produtos/:categoria/:ordem", function (req, res) {
 });
 
 app.post("/produto/", function (req, res) {
-  const { titulo, preco, descricao, avaliacao, foto, categoria } = req.body;
+  const data = req.body;
   conexao.query(
-    `INSERT INTO produtos(titulo, preco, descricao, avaliacao, foto, categoria) values('${titulo}', '${preco}', '${descricao}', '${avaliacao}', '${foto}', '${categoria}')`,
+    `INSERT INTO produtos set ?`,
+    [data],
     function (erro, resultado) {
       if (erro) {
         res.json(erro);
@@ -127,10 +128,10 @@ app.get("/unidades", function (req, res) {
 });
 
 app.post("/unidade/", function (req, res) {
-  const { nome_da_loja, foto, telefone, email, endereco, latitude, longitude } =
-    req.body;
+  const data = req.body;
   conexao.query(
-    `INSERT INTO unidades(nome_da_loja, telefone, email, endereco, latitude, longitude, foto) values('${nome_da_loja}', '${telefone}', '${email}', '${endereco}', '${latitude}', '${longitude}', '${foto}')`,
+    `INSERT INTO unidades set ?`,
+    [data],
     function (erro, resultado) {
       if (erro) {
         res.json(erro);

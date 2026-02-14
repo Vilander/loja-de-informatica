@@ -13,6 +13,14 @@ function fnLimparCampos() {
   document.getElementById("form-unidades").reset();
 }
 
+function fnMensagemSalvar() {
+  let toastElList = [].slice.call(document.querySelectorAll(".toast"));
+  let toastList = toastElList.map(function (toastEl) {
+    return new bootstrap.Toast(toastEl);
+  });
+  toastList.forEach((toast) => toast.show());
+}
+
 function fnCadastrarUnidades() {
   let formDados = {
     nome_da_loja: document.getElementById("nome_da_loja").value,
@@ -35,6 +43,7 @@ function fnCadastrarUnidades() {
     .then((dados) => {
       fnLimparCampos();
       console.log(dados);
+      fnMensagemSalvar();
     })
     .catch((erro) => console.log(erro.message));
 }

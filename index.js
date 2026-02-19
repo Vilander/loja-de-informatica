@@ -1,7 +1,11 @@
 const express = require("express");
 const app = express();
 
-//necessárop ára permitir requisições de diferentes origens(domínios/servidores)
+const bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+//necessárop para permitir requisições de diferentes origens(domínios/servidores)
 const cors = require("cors");
 app.use(cors());
 app.use(express.json());
@@ -139,6 +143,24 @@ app.post("/unidade/", function (req, res) {
       res.send(resultado.insertId);
     },
   );
+});
+
+app.post("/login/", function (req, res) {
+  const usuario = req.body.usuario;
+  const senha = req.body.senha;
+  conexao.query(
+    `SELECT * FROM usuarios WHERE usuario = '${usuario}' AND senha ='${senha}'`,
+    function (erro, resultado, campos) {
+      if (erro) {
+        res.send(erro);
+      } else {
+        if (resultado.length > 0) {
+          res.status(200).send("Login realizado com sucesso!");
+        } else {
+          res.status(401).send("Inválido");
+        }
+      }
+    });
 });
 
 app.listen(3000);

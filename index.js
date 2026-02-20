@@ -120,6 +120,21 @@ app.post("/produto/", function (req, res) {
   );
 });
 
+//READ ONE - [GET] / produto /: id
+
+app.get("/produto/:id", function (req, res) {
+  const id = req.params.id;
+  conexao.query(
+    "SELECT * FROM produtos WHERE id = ?",
+    [id],
+    function (erro, dados, campos) {
+      res.json(dados);
+    },
+  );
+});
+
+//==========================================================//
+//READY ALL UNIDADES
 app.get("/unidades", function (req, res) {
   //res.setHeader('Access-Control-Allow-Origin', '*')
   conexao.query(
@@ -145,22 +160,43 @@ app.post("/unidade/", function (req, res) {
   );
 });
 
-app.post("/login/", function (req, res) {
+//==========================================================//
+//LOGIN E CADASTRO DE USUÁRIOS
+app.post("/login/", (req, res) => {
   const usuario = req.body.usuario;
   const senha = req.body.senha;
   conexao.query(
-    `SELECT * FROM usuarios WHERE usuario = '${usuario}' AND senha ='${senha}'`,
-    function (erro, resultado, campos) {
+    `SELECT * FROM usuarios WHERE usuario = '${usuario}' AND senha = '${senha}'`,
+    (erro, resultado, campo) => {
       if (erro) {
         res.send(erro);
       } else {
         if (resultado.length > 0) {
-          res.status(200).send("Login realizado com sucesso!");
+          res.sendStatus(200);
         } else {
-          res.status(401).send("Inválido");
+          res.sendStatus(401);
         }
       }
-    });
+    },
+  );
+});
+
+app.post("/cadastro/", (req, res) => {
+  const data = req.body;
+
+  console.log(data);
+
+  conexao.query(
+    "INSERT INTO usuarios set ?",
+    [data],
+    (erro, resultado, campo) => {
+      if (erro) {
+        res.sendStatus(401);
+      } else {
+        res.sendStatus(200);
+      }
+    },
+  );
 });
 
 app.listen(3000);

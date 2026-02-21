@@ -199,4 +199,21 @@ app.post("/cadastro/", (req, res) => {
   );
 });
 
+//====================Update - [PUT] / produto/:id ========================//
+app.put("/produto/:id", function (req, res) {
+  const id = req.params.id;
+  const data = req.body;
+
+  conexao.query(
+    `UPDATE produtos set ? WHERE id = ${id}`,
+    [data],
+    function (erro, resultado) {
+      if (erro) {
+        res.send(erro);
+      }
+      res.send({ status: 200, message: "Produto atualizado com sucesso!" });
+    },
+  );
+});
+
 app.listen(3000);

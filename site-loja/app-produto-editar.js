@@ -25,7 +25,10 @@ function fnMensagemSalvar() {
 
 //===================////===================////===================//
 
-function fnCadastrarProdutos() {
+function fnSalvarProdutos() {
+  const parametros = new URLSearchParams(window.location.search);
+  const id = parametros.get("id") + "/";
+  
   let formDados = {
     titulo: document.getElementById("titulo").value,
     preco: document.getElementById("preco").value,
@@ -35,10 +38,8 @@ function fnCadastrarProdutos() {
     categoria: document.getElementById("categoria").value,
   };
 
-  //console.dir(formDados)
-
-  fetch("http://localhost:3000/produto/", {
-    method: "POST",
+  fetch("http://localhost:3000/produto/" + id, {
+    method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(formDados),
   })
@@ -59,7 +60,7 @@ foto.addEventListener("blur", function () {
 });
 
 btn_salvar.addEventListener("click", () => {
-  fnCadastrarProdutos();
+  fnSalvarProdutos();
 });
 
 //========================editar produto========================//
